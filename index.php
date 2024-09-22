@@ -16,7 +16,7 @@ class PostsQuiz{
     }
 
     function adminAssets(){
-        wp_enqueue_script('posts-quiz', plugin_dir_url(__FILE__) . 'test.js', array('wp-blocks', 'wp-element', 'wp-editor'));
+        wp_enqueue_script('posts-quiz', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-element', 'wp-editor'));
     }
 }
 

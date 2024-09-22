@@ -4,9 +4,14 @@
   "description": "Quiz Block for WordPress Gutenberg Editor to add Quizzes to Posts.",
   "main": "test.js",
   "scripts": {
+    "build": "wp-scripts build",
+    "start": "wp-scripts start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@wordpress/scripts": "^26.12.0"
+  }
 }
