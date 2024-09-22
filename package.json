@@ -1,0 +1,12 @@
+{
+  "name": "quiz-in-posts",
+  "version": "1.0.0",
+  "description": "Quiz Block for WordPress Gutenberg Editor to add Quizzes to Posts.",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
