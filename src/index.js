@@ -5,13 +5,9 @@ wp.blocks.registerBlockType("posts-quiz/quiz", {
     attributes: {
         QuizTitle: {
             type: "string",
-            // source: "text",
-            // selector: ".quiz-title"
         },
         QuizDescription: {
             type: "string",
-            // source: "text",
-            // selector: ".quiz-description"
         }
     },
     edit: function (props) {
@@ -32,11 +28,6 @@ wp.blocks.registerBlockType("posts-quiz/quiz", {
         )
     },
     save: function (props) {
-        return (
-            <div>
-                <p>Quiz title here <span className="quiz-title">{props.attributes.QuizTitle}</span></p>
-                <p>Quiz description here <span className="quiz-description">{props.attributes.QuizDescription}</span></p>
-            </div>
-        )
+        return null
     }
 })

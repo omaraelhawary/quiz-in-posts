@@ -12,11 +12,22 @@ if (! defined('ABSPATH')) exit; // Exit if accessed directly
 
 class PostsQuiz{
     function __construct() {
-        add_action('enqueue_block_editor_assets', array($this, 'adminAssets'));
+        add_action('init', array($this, 'adminAssets'));
     }
 
     function adminAssets(){
-        wp_enqueue_script('posts-quiz', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-element', 'wp-editor'));
+        wp_register_script('posts-quiz', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-element', 'wp-editor'));
+        register_block_type( 'posts-quiz/quiz', array(
+            'editor_script' => 'posts-quiz',
+            'render_callback' => array($this, 'renderHTML'),
+        ));
+    }
+
+    function renderHTML($attributes) {
+        ob_start(); ?>
+        <h1> Quiz title '. $attributes['QuizTitle'] .'</h1><h> Quiz description 
+        '. $attributes['QuizDescription'] . '</h>;  
+        <?php return ob_get_clean();
     }
 }
 
