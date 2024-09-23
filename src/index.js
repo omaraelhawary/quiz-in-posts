@@ -33,23 +33,22 @@ function EditComponent(props) {
 
     return (
         <div className="posts-quiz-edit-block">
-            <TextControl label="Question:" />
-            <p>Answer: </p>
+            <TextControl label="Question:" style={{ fontSize: "30px" }} />
+            <p style={{ fontSize: "13px", margin: "20px 0 8px 0" }}>Answer: </p>
             <Flex>
                 <FlexBlock>
                     <TextControl />
                 </FlexBlock>
                 <FlexItem>
                     <Button>
-                        <Icon icon="star-empty" />
+                        <Icon icon="star-empty" className="star-icon" />
                     </Button>
                 </FlexItem>
                 <FlexItem>
-                    <Button>
-                        Delete
-                    </Button>
+                    <Button isLink className="delete-button">Delete</Button>
                 </FlexItem>
             </Flex>
+            <Button isPrimary>Add Another Answer</Button>
         </div>
     )
 }

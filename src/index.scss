@@ -1,6 +1,28 @@
 .posts-quiz-edit-block {
     padding: 20px;
     border-radius: 2px;
-    border: 1px solid #f1f1f1;
-    background-color: #d6d6d6;
+    border: 1px solid #d6d6d6;
+    background-color: #f1f1f1;
+
+    .star-icon {
+        color: #ffd700;
+        position: relative;
+        top: -3px;
+        transition: transform 0.3s ease-out;
+
+        &:hover {
+            color: #ffcc00;
+            transform: scale(1.25) rotate(12deg);
+        }
+    }
+
+    .delete-button {
+        color: #ff0000;
+        position: relative;
+        top: -5px;
+
+        &:hover {
+            color: #c20000;
+        }
+    }
 }
