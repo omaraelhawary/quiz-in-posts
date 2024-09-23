@@ -1,3 +1,7 @@
+import "./index.scss"
+import { TextControl, Flex, FlexBlock, FlexItem, Button, Icon } from "@wordpress/components"
+
+
 wp.blocks.registerBlockType("posts-quiz/quiz", {
     title: "Quiz",
     icon: "smiley",
@@ -10,24 +14,42 @@ wp.blocks.registerBlockType("posts-quiz/quiz", {
             type: "string",
         }
     },
-    edit: function (props) {
-
-        function updateQuizTitle(event) {
-            props.setAttributes({ QuizTitle: event.target.value })
-        }
-
-        function updateQuizDescription(event) {
-            props.setAttributes({ QuizDescription: event.target.value })
-        }
-
-        return (
-            <div>
-                <input type="text" placeholder="Quiz Title" value={props.attributes.QuizTitle} onChange={updateQuizTitle} />
-                <input type="text" placeholder="Quiz Description" value={props.attributes.QuizDescription} onChange={updateQuizDescription} />
-            </div>
-        )
-    },
+    edit: EditComponent,
     save: function (props) {
         return null
     }
 })
+
+
+function EditComponent(props) {
+
+    function updateQuizTitle(event) {
+        props.setAttributes({ QuizTitle: event.target.value })
+    }
+
+    function updateQuizDescription(event) {
+        props.setAttributes({ QuizDescription: event.target.value })
+    }
+
+    return (
+        <div className="posts-quiz-edit-block">
+            <TextControl label="Question:" />
+            <p>Answer: </p>
+            <Flex>
+                <FlexBlock>
+                    <TextControl />
+                </FlexBlock>
+                <FlexItem>
+                    <Button>
+                        <Icon icon="star-empty" />
+                    </Button>
+                </FlexItem>
+                <FlexItem>
+                    <Button>
+                        Delete
+                    </Button>
+                </FlexItem>
+            </Flex>
+        </div>
+    )
+}
