@@ -267,11 +267,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function ourStartFunction() {
+(function () {
   let locked = false;
   wp.data.subscribe(function () {
     const results = wp.data.select("core/block-editor").getBlocks().filter(block => {
-      return block.name == "posts-quiz/quiz" && block.attributes.correctAnswer == undefined;
+      const isAnswerNull = block.name == 'posts-quiz/quiz' && block.attributes.correctAnswer === null;
+      return isAnswerNull;
     });
     if (results.length && !locked) {
       locked = true;
@@ -282,8 +283,7 @@ function ourStartFunction() {
       wp.data.dispatch("core/editor").unlockPostSaving("nullAnswer");
     }
   });
-}
-ourStartFunction();
+})();
 wp.blocks.registerBlockType("posts-quiz/quiz", {
   title: "Quiz",
   icon: "smiley",

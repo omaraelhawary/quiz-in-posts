@@ -2,12 +2,14 @@ import { v4 as uuid } from 'uuid'
 import "./index.scss"
 import { TextControl, Flex, FlexBlock, FlexItem, Button, Icon } from "@wordpress/components"
 
-function ourStartFunction() {
+(function () {
     let locked = false;
 
     wp.data.subscribe(function () {
         const results = wp.data.select("core/block-editor").getBlocks().filter((block) => {
-            return block.name == "posts-quiz/quiz" && block.attributes.correctAnswer == undefined
+            const isAnswerNull = block.name == 'posts-quiz/quiz' && block.attributes.correctAnswer === null
+            return isAnswerNull
+
         })
 
         if (results.length && !locked) {
@@ -21,9 +23,7 @@ function ourStartFunction() {
         }
     }
     )
-}
-
-ourStartFunction();
+})()
 
 wp.blocks.registerBlockType("posts-quiz/quiz", {
     title: "Quiz",
