@@ -7,11 +7,14 @@ wp.blocks.registerBlockType("posts-quiz/quiz", {
     icon: "smiley",
     category: "common",
     attributes: {
-        QuizTitle: {
+        question: {
             type: "string",
         },
-        QuizDescription: {
-            type: "string",
+        answers: {
+            type: "array",
+            default: [
+
+            ]
         }
     },
     edit: EditComponent,
@@ -23,32 +26,46 @@ wp.blocks.registerBlockType("posts-quiz/quiz", {
 
 function EditComponent(props) {
 
-    function updateQuizTitle(event) {
-        props.setAttributes({ QuizTitle: event.target.value })
+    function updateQuestion(value) {
+        props.setAttributes({ question: value })
     }
 
-    function updateQuizDescription(event) {
-        props.setAttributes({ QuizDescription: event.target.value })
+    function deleteAnswer(indexToDelete) {
+        const newAnswers = props.attributes.answers.filter(function (x, index) {
+            return index != indexToDelete
+        })
+        props.setAttributes({ answers: newAnswers })
     }
 
     return (
         <div className="posts-quiz-edit-block">
-            <TextControl label="Question:" style={{ fontSize: "30px" }} />
+            <TextControl label="Question:" value={props.attributes.question} onChange={updateQuestion} style={{ fontSize: "30px" }} />
             <p style={{ fontSize: "13px", margin: "20px 0 8px 0" }}>Answer: </p>
-            <Flex>
-                <FlexBlock>
-                    <TextControl />
-                </FlexBlock>
-                <FlexItem>
-                    <Button>
-                        <Icon icon="star-empty" className="star-icon" />
-                    </Button>
-                </FlexItem>
-                <FlexItem>
-                    <Button isLink className="delete-button">Delete</Button>
-                </FlexItem>
-            </Flex>
-            <Button isPrimary>Add Another Answer</Button>
-        </div>
+            {props.attributes.answers.map((answer, index) => {
+                return (
+                    <Flex>
+                        <FlexBlock>
+                            <TextControl value={answer} onChange={newValue => {
+                                const newAnswers = props.attributes.answers.concat([])
+                                newAnswers[index] = newValue
+                                props.setAttributes({ answers: newAnswers })
+                            }} />
+                        </FlexBlock>
+                        <FlexItem>
+                            <Button>
+                                <Icon icon="star-empty" className="star-icon" />
+                            </Button>
+                        </FlexItem>
+                        <FlexItem>
+                            <Button isLink className="delete-button" onClick={
+                                () => deleteAnswer(index)
+                            }>Delete</Button>
+                        </FlexItem>
+                    </Flex>
+                )
+            })}
+            <Button isPrimary onClick={() => {
+                props.setAttributes({ answers: props.attributes.answers.concat(['']) })
+            }}>Add Another Answer</Button>        </div>
     )
 }
