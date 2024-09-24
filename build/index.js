@@ -164,6 +164,7 @@ function EditComponent(props) {
   }, "Answer: "), props.attributes.answers.map((answer, index) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Flex, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FlexBlock, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
       value: answer,
+      autoFocus: true,
       onChange: newValue => {
         const newAnswers = props.attributes.answers.concat([]);
         newAnswers[index] = newValue;
@@ -183,7 +184,7 @@ function EditComponent(props) {
     isPrimary: true,
     onClick: () => {
       props.setAttributes({
-        answers: props.attributes.answers.concat([''])
+        answers: props.attributes.answers.concat([undefined])
       });
     }
   }, "Add Another Answer"), "        ");
