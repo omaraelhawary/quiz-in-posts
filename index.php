@@ -26,9 +26,14 @@ class PostsQuiz{
     }
 
     function renderHTML($attributes) {
+        if(!is_admin()){
+            wp_enqueue_script('posts-quiz-frontend', plugin_dir_url(__FILE__) . 'build/frontend.js', array('wp-blocks', 'wp-element', 'wp-editor'));
+            wp_enqueue_style('posts-quiz-frontend-css', plugin_dir_url(__FILE__) . 'build/frontend.css');
+        }
+        
+
         ob_start(); ?>
-        <h1> Quiz title '. $attributes['QuizTitle'] .'</h1><h> Quiz description 
-        '. $attributes['QuizDescription'] . '</h>;  
+            <div class="posts-quiz-frontend"> </div>
         <?php return ob_get_clean();
     }
 }
