@@ -179,7 +179,10 @@ function Quiz(props) {
     }
   }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "posts-quiz-frontend"
+    className: "posts-quiz-frontend",
+    style: {
+      backgroundColor: props.bgColor
+    }
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, props.question), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", null, props.answers.map(answer => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
       className: (isCorrectDelayed === true && answer.id == props.correctAnswer ? "no-click" : "") + (isCorrectDelayed === true && answer.id != props.correctAnswer ? "fade-incorrect" : ""),
