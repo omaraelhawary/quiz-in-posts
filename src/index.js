@@ -2,6 +2,7 @@ import { v4 as uuid } from 'uuid'
 import "./index.scss"
 import { TextControl, Flex, FlexBlock, FlexItem, Button, Icon, PanelBody, PanelRow, ColorPicker } from "@wordpress/components"
 import { InspectorControls } from "@wordpress/block-editor"
+import { ChromePicker } from "react-color"
 
 (function () {
     let locked = false;
@@ -83,9 +84,9 @@ function EditComponent(props) {
             <InspectorControls>
                 <PanelBody title="Background Color" initialOpen={true}>
                     <PanelRow>
-                        <ColorPicker color={props.attributes.bgColor} onChangeComplete={
+                        <ChromePicker color={props.attributes.bgColor} onChangeComplete={
                             color => props.setAttributes({ bgColor: color.hex })
-                        } />
+                        } disableAlpha={true} />
                     </PanelRow>
                 </PanelBody>
             </InspectorControls>
