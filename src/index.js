@@ -40,7 +40,7 @@ wp.blocks.registerBlockType("posts-quiz/quiz", {
             default: [{ id: uuid(), name: '' }]
         },
         correctAnswer: {
-            type: "number",
+            type: "string",
             default: null
         },
         bgColor: {
@@ -78,7 +78,6 @@ function EditComponent(props) {
     }
 
     const { question } = props.attributes;
-
     return (
         <div className="posts-quiz-edit-block" style={{ backgroundColor: props.attributes.bgColor }}>
             <InspectorControls>
@@ -120,6 +119,7 @@ function EditComponent(props) {
                 props.setAttributes({
                     answers: props.attributes.answers.concat([{ id: uuid(), name: null }])
                 })
-            }}>Add Another Answer</Button>        </div>
+            }}>Add Another Answer</Button>
+        </div>
     )
 }

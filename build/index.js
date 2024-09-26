@@ -16357,7 +16357,7 @@ wp.blocks.registerBlockType("posts-quiz/quiz", {
       }]
     },
     correctAnswer: {
-      type: "number",
+      type: "string",
       default: null
     },
     bgColor: {
@@ -16461,7 +16461,7 @@ function EditComponent(props) {
         }])
       });
     }
-  }, "Add Another Answer"), "        ");
+  }, "Add Another Answer"));
 }
 })();
 
