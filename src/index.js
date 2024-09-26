@@ -1,6 +1,7 @@
 import { v4 as uuid } from 'uuid'
 import "./index.scss"
-import { TextControl, Flex, FlexBlock, FlexItem, Button, Icon } from "@wordpress/components"
+import { TextControl, Flex, FlexBlock, FlexItem, Button, Icon, PanelBody, PanelRow, ColorPicker } from "@wordpress/components"
+import { InspectorControls } from "@wordpress/block-editor"
 
 (function () {
     let locked = false;
@@ -40,6 +41,10 @@ wp.blocks.registerBlockType("posts-quiz/quiz", {
         correctAnswer: {
             type: "number",
             default: null
+        },
+        bgColor: {
+            type: "string",
+            default: "#EBEBEB"
         }
     },
     edit: EditComponent,
@@ -74,7 +79,16 @@ function EditComponent(props) {
     const { question } = props.attributes;
 
     return (
-        <div className="posts-quiz-edit-block">
+        <div className="posts-quiz-edit-block" style={{ backgroundColor: props.attributes.bgColor }}>
+            <InspectorControls>
+                <PanelBody title="Background Color" initialOpen={true}>
+                    <PanelRow>
+                        <ColorPicker color={props.attributes.bgColor} onChangeComplete={
+                            color => props.setAttributes({ bgColor: color.hex })
+                        } />
+                    </PanelRow>
+                </PanelBody>
+            </InspectorControls>
             <TextControl label="Question:" value={props.attributes.question} onChange={updateQuestion} style={{ fontSize: "30px" }} />
             <p style={{ fontSize: "13px", margin: "20px 0 8px 0" }}>Answer: </p>
             {props.attributes.answers.map((answer, index) => {
@@ -94,14 +108,14 @@ function EditComponent(props) {
                             </Button>
                         </FlexItem>
                         <FlexItem>
-                            <Button isLink className="delete-button" onClick={
+                            <Button variant="link" className="delete-button" onClick={
                                 () => deleteAnswer(answer.id)
                             }>Delete</Button>
                         </FlexItem>
                     </Flex>
                 )
             })}
-            <Button isPrimary onClick={() => {
+            <Button variant="primary" onClick={() => {
                 props.setAttributes({
                     answers: props.attributes.answers.concat([{ id: uuid(), name: null }])
                 })

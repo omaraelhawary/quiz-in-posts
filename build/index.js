@@ -174,6 +174,16 @@ module.exports = window["React"];
 
 /***/ }),
 
+/***/ "@wordpress/block-editor":
+/*!*************************************!*\
+  !*** external ["wp","blockEditor"] ***!
+  \*************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["blockEditor"];
+
+/***/ }),
+
 /***/ "@wordpress/components":
 /*!************************************!*\
   !*** external ["wp","components"] ***!
@@ -259,10 +269,13 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/v4.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/v4.js");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.scss */ "./src/index.scss");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -295,13 +308,17 @@ wp.blocks.registerBlockType("posts-quiz/quiz", {
     answers: {
       type: "array",
       default: [{
-        id: (0,uuid__WEBPACK_IMPORTED_MODULE_3__["default"])(),
+        id: (0,uuid__WEBPACK_IMPORTED_MODULE_4__["default"])(),
         name: ''
       }]
     },
     correctAnswer: {
       type: "number",
       default: null
+    },
+    bgColor: {
+      type: "string",
+      default: "#EBEBEB"
     }
   },
   edit: EditComponent,
@@ -338,8 +355,19 @@ function EditComponent(props) {
     question
   } = props.attributes;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "posts-quiz-edit-block"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+    className: "posts-quiz-edit-block",
+    style: {
+      backgroundColor: props.attributes.bgColor
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: "Background Color",
+    initialOpen: true
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+    color: props.attributes.bgColor,
+    onChangeComplete: color => props.setAttributes({
+      bgColor: color.hex
+    })
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
     label: "Question:",
     value: props.attributes.question,
     onChange: updateQuestion,
@@ -374,16 +402,16 @@ function EditComponent(props) {
       icon: isCorrectAnswer ? "star-filled" : "star-empty",
       className: "star-icon"
     }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FlexItem, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      isLink: true,
+      variant: "link",
       className: "delete-button",
       onClick: () => deleteAnswer(answer.id)
     }, "Delete")));
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-    isPrimary: true,
+    variant: "primary",
     onClick: () => {
       props.setAttributes({
         answers: props.attributes.answers.concat([{
-          id: (0,uuid__WEBPACK_IMPORTED_MODULE_3__["default"])(),
+          id: (0,uuid__WEBPACK_IMPORTED_MODULE_4__["default"])(),
           name: null
         }])
       });
