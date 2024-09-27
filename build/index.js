@@ -16394,6 +16394,12 @@ wp.blocks.registerBlockType("posts-quiz/quiz", {
   }
 });
 function EditComponent(props) {
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)({
+    className: "posts-quiz-edit-block",
+    style: {
+      backgroundColor: props.attributes.bgColor
+    }
+  });
   function updateQuestion(value) {
     props.setAttributes({
       question: value
@@ -16422,11 +16428,7 @@ function EditComponent(props) {
     question
   } = props.attributes;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    div: true,
-    className: "posts-quiz-edit-block",
-    style: {
-      backgroundColor: props.attributes.bgColor
-    }
+    ...blockProps
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.AlignmentToolbar, {
     value: props.attributes.theAlign,
     onChange: value => props.setAttributes({

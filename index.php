@@ -16,11 +16,7 @@ class PostsQuiz{
     }
 
     function adminAssets(){
-        wp_register_style('quiz-edit-css', plugin_dir_url(__FILE__) . 'build/index.css');
-        wp_register_script('posts-quiz', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-element', 'wp-editor'));
-        register_block_type( 'posts-quiz/quiz', array(
-            'editor_script' => 'posts-quiz',
-            'editor_style' => 'quiz-edit-css',
+        register_block_type( __DIR__, array(
             'render_callback' => array($this, 'renderHTML'),
         ));
     }
