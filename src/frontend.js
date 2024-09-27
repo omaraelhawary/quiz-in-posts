@@ -38,7 +38,7 @@ function Quiz(props) {
     }
 
     return (
-        <div className="posts-quiz-frontend" style={{ backgroundColor: props.bgColor }}>
+        <div className="posts-quiz-frontend" style={{ backgroundColor: props.bgColor, textAlign: props.theAlign }}>
             <p>{props.question}</p>
             <ul>
                 {props.answers.map((answer) => {

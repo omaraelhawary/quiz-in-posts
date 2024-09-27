@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid'
 import "./index.scss"
 import { TextControl, Flex, FlexBlock, FlexItem, Button, Icon, PanelBody, PanelRow, ColorPicker } from "@wordpress/components"
-import { InspectorControls } from "@wordpress/block-editor"
+import { InspectorControls, BlockControls, AlignmentToolbar } from "@wordpress/block-editor"
 import { ChromePicker } from "react-color"
 
 (function () {
@@ -46,6 +46,10 @@ wp.blocks.registerBlockType("posts-quiz/quiz", {
         bgColor: {
             type: "string",
             default: "#EBEBEB"
+        },
+        theAlign: {
+            type: "string",
+            default: "left"
         }
     },
     edit: EditComponent,
@@ -80,6 +84,9 @@ function EditComponent(props) {
     const { question } = props.attributes;
     return (
         <div className="posts-quiz-edit-block" style={{ backgroundColor: props.attributes.bgColor }}>
+            <BlockControls>
+                <AlignmentToolbar value={props.attributes.theAlign} onChange={value => props.setAttributes({ theAlign: value })} />
+            </BlockControls>
             <InspectorControls>
                 <PanelBody title="Background Color" initialOpen={true}>
                     <PanelRow>

@@ -181,7 +181,8 @@ function Quiz(props) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "posts-quiz-frontend",
     style: {
-      backgroundColor: props.bgColor
+      backgroundColor: props.bgColor,
+      textAlign: props.theAlign
     }
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, props.question), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", null, props.answers.map(answer => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
