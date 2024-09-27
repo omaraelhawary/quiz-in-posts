@@ -52,6 +52,7 @@ wp.blocks.registerBlockType("posts-quiz/quiz", {
             default: "left"
         }
     },
+    description: "Quiz Block for WordPress Gutenberg Editor to add Quizzes to Posts.",
     example: {
         attributes: {
             question: "What is my name?",
