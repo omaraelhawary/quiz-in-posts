@@ -16369,6 +16369,24 @@ wp.blocks.registerBlockType("posts-quiz/quiz", {
       default: "left"
     }
   },
+  example: {
+    attributes: {
+      question: "What is my name?",
+      answers: [{
+        id: "0",
+        name: "David"
+      }, {
+        id: "1",
+        name: "Omar"
+      }, {
+        id: "2",
+        name: "Ahmed"
+      }],
+      correctAnswer: "1",
+      bgColor: "#EBEBEB",
+      theAlign: "left"
+    }
+  },
   edit: EditComponent,
   save: function () {
     return null;
@@ -16388,7 +16406,7 @@ function EditComponent(props) {
     props.setAttributes({
       answers: newAnswers
     });
-    if (indexToDelete == props.attributes.correctAnswer) {
+    if (indexToDelete === props.attributes.correctAnswer) {
       props.setAttributes({
         correctAnswer: null
       });
@@ -16396,13 +16414,14 @@ function EditComponent(props) {
   }
   function markAsCorrect(index) {
     props.setAttributes({
-      correctAnswer: index
+      correctAnswer: String(index)
     });
   }
   const {
     question
   } = props.attributes;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    div: true,
     className: "posts-quiz-edit-block",
     style: {
       backgroundColor: props.attributes.bgColor
@@ -16434,7 +16453,7 @@ function EditComponent(props) {
       margin: "20px 0 8px 0"
     }
   }, "Answer: "), props.attributes.answers.map((answer, index) => {
-    const isCorrectAnswer = props.attributes.correctAnswer == answer.id;
+    const isCorrectAnswer = props.attributes.correctAnswer === answer.id;
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Flex, {
       key: answer.id
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FlexBlock, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {

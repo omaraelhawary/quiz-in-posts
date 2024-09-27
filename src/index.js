@@ -52,7 +52,15 @@ wp.blocks.registerBlockType("posts-quiz/quiz", {
             default: "left"
         }
     },
-    edit: EditComponent,
+    example: {
+        attributes: {
+            question: "What is my name?",
+            answers: [{ id: "0", name: "David" }, { id: "1", name: "Omar" }, { id: "2", name: "Ahmed" }],
+            correctAnswer: "1",
+            bgColor: "#EBEBEB",
+            theAlign: "left"
+        }
+    }, edit: EditComponent,
     save: function () {
         return null
     }
@@ -72,18 +80,19 @@ function EditComponent(props) {
         })
         props.setAttributes({ answers: newAnswers })
 
-        if (indexToDelete == props.attributes.correctAnswer) {
+        if (indexToDelete === props.attributes.correctAnswer) {
             props.setAttributes({ correctAnswer: null })
         }
     }
 
     function markAsCorrect(index) {
-        props.setAttributes({ correctAnswer: index })
+        props.setAttributes({ correctAnswer: String(index) })
     }
 
     const { question } = props.attributes;
     return (
-        <div className="posts-quiz-edit-block" style={{ backgroundColor: props.attributes.bgColor }}>
+        <div div className="posts-quiz-edit-block" style={{ backgroundColor: props.attributes.bgColor }
+        }>
             <BlockControls>
                 <AlignmentToolbar value={props.attributes.theAlign} onChange={value => props.setAttributes({ theAlign: value })} />
             </BlockControls>
@@ -98,35 +107,37 @@ function EditComponent(props) {
             </InspectorControls>
             <TextControl label="Question:" value={props.attributes.question} onChange={updateQuestion} style={{ fontSize: "30px" }} />
             <p style={{ fontSize: "13px", margin: "20px 0 8px 0" }}>Answer: </p>
-            {props.attributes.answers.map((answer, index) => {
-                const isCorrectAnswer = props.attributes.correctAnswer == answer.id
-                return (
-                    <Flex key={answer.id}>
-                        <FlexBlock>
-                            <TextControl value={answer.name} autoFocus={answer.name === null} onChange={newValue => {
-                                const newAnswers = props.attributes.answers.concat([])
-                                newAnswers[index] = { id: answer.id, name: newValue }
-                                props.setAttributes({ answers: newAnswers })
-                            }} />
-                        </FlexBlock>
-                        <FlexItem>
-                            <Button onClick={() => markAsCorrect(answer.id)}>
-                                <Icon icon={isCorrectAnswer ? "star-filled" : "star-empty"} className="star-icon" />
-                            </Button>
-                        </FlexItem>
-                        <FlexItem>
-                            <Button variant="link" className="delete-button" onClick={
-                                () => deleteAnswer(answer.id)
-                            }>Delete</Button>
-                        </FlexItem>
-                    </Flex>
-                )
-            })}
+            {
+                props.attributes.answers.map((answer, index) => {
+                    const isCorrectAnswer = props.attributes.correctAnswer === answer.id
+                    return (
+                        <Flex key={answer.id}>
+                            <FlexBlock>
+                                <TextControl value={answer.name} autoFocus={answer.name === null} onChange={newValue => {
+                                    const newAnswers = props.attributes.answers.concat([])
+                                    newAnswers[index] = { id: answer.id, name: newValue }
+                                    props.setAttributes({ answers: newAnswers })
+                                }} />
+                            </FlexBlock>
+                            <FlexItem>
+                                <Button onClick={() => markAsCorrect(answer.id)}>
+                                    <Icon icon={isCorrectAnswer ? "star-filled" : "star-empty"} className="star-icon" />
+                                </Button>
+                            </FlexItem>
+                            <FlexItem>
+                                <Button variant="link" className="delete-button" onClick={
+                                    () => deleteAnswer(answer.id)
+                                }>Delete</Button>
+                            </FlexItem>
+                        </Flex>
+                    )
+                })
+            }
             <Button variant="primary" onClick={() => {
                 props.setAttributes({
                     answers: props.attributes.answers.concat([{ id: uuid(), name: null }])
                 })
             }}>Add Another Answer</Button>
-        </div>
+        </div >
     )
 }
